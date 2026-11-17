@@ -1,0 +1,15 @@
+# World Bank microdata: do not publish respondent-level files
+data/raw/*
+!data/raw/README.md
+data/processed/*
+!data/processed/.gitkeep
+data/interim/
+*.zip
+*.csv
+*.parquet
+*.xlsx
+.ipynb_checkpoints/
+__pycache__/
+.venv/
+.env
+.DS_Store
