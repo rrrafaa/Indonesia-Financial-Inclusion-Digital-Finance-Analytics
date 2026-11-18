@@ -1,9 +1,9 @@
-# Person 1 — Financial Inclusion EDA: Findings & Interpretation
+# Rafa — Financial Inclusion EDA: Findings & Interpretation
 
 **Dataset:** World Bank Global Findex, Indonesia 2024 (`IDN_2024_FINDEX_v02_M`)  
-**Analysis owner:** Person 1 (`rrrafaa`)  
+**Analysis owner:** Rafa (`rrrafaa`)  
 **Notebook:** [04 — Financial Inclusion EDA](../notebooks/04_eda_inclusion.ipynb)  
-**Status:** **Preliminary descriptive EDA**. Notebook 02 variable mapping and Notebook 03 shared cleaning must be reviewed before dashboard finalization.
+**Status:** **Integrated and cross-validated EDA (18 November 2026).** Rafa executed Notebook 04 using the private cleaned data and canonical aggregates produced by Notebook 03. All **14 Notebook 03 integration checks** and **140/140 Notebook 04 KPI comparisons** passed. Mutia's Notebook 05 and joint dashboard preparation are pending.
 
 ## Executive summary
 
@@ -92,13 +92,13 @@ For a separate example where the pattern differs by outcome, mobile money accoun
 
 | Order | Owner | Deliverable |
 |---|---|---|
-| 1 | Person 1 | Rerun Notebook 04 from the updated GitHub source so the revised subgroup chart excludes missing education; inspect new graphs |
-| 2 | Person 2 | Finish Notebook 02 (definitions, eligible responses, missing/skip logic) |
-| 3 | Both | Finish Notebook 03; agree on canonical mappings, cleaning and weighted formulas |
-| 4 | Person 1 | Recompute Notebook 04 with the agreed transformation and validate the national KPI |
-| 5 | Both | Cross-review and approve aggregated tables for Google Sheets / Looker Studio; keep raw respondent data private |
-| 6 | Person 1 | Build Dashboard Page 1 (Overview) and Page 2 (Inclusion & Demographic Gap) |
-| 7 | Person 2 | Build Page 3 (Digital Finance) and Page 4 (Financial Barriers) |
-| 8 | Both | Test filters and metric consistency; add dashboard link, screenshots, methodology and final narrative to README |
+| 1 | Rafa | **Completed:** Notebook 04 rerun from Notebook 03 integrated data; all 140 KPI comparisons passed and revised charts were saved |
+| 2 | Mutia | Review corrected Notebook 02 mappings and rerun the affected barrier outputs before Notebook 05 |
+| 3 | Rafa + Mutia | **Completed pipeline:** Notebook 03 executed with 14 PASS checks; peer-review and approve the definitions together |
+| 4 | Rafa | **Completed:** Notebook 04 recalculated and cross-checked all 140 KPI rows against Notebook 03 outputs |
+| 5 | Rafa + Mutia | Cross-review and approve aggregated tables for Google Sheets / Looker Studio; keep raw respondent data private |
+| 6 | Rafa | Build Dashboard Page 1 (Overview) and Page 2 (Inclusion & Demographic Gap) |
+| 7 | Mutia | Build Page 3 (Digital Finance) and Page 4 (Financial Barriers) |
+| 8 | Rafa + Mutia | Test filters and metric consistency; add dashboard link, screenshots, methodology and final narrative to README |
 
 **Suggested dashboard headline:** *Income, education, and age show considerably larger descriptive differences in account ownership than gender or rural/urban residence in Indonesia’s 2024 Findex survey.*
