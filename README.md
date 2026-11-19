@@ -4,7 +4,7 @@
 
 **Alur:** sumber resmi → Python / Google Colab → validasi dan cleaning bersama → eksplorasi berbobot (`wgt`) → tabel agregat tervalidasi → Google Sheets / Looker Studio.
 
-> **Status 18 November 2026:** Notebook 01–05 tersedia di GitHub. Notebook 03: **14/14 QA PASS**, Notebook 04: **140/140 KPI cross-checks PASS**, dan Notebook 05: **100/100 KPI + 6/6 barrier cross-checks serta 11/11 QA PASS** berdasarkan hasil Google Colab. Notebook 06 telah dibuat dan siap dijalankan di Colab; ekspor dashboard dan publikasi Looker Studio belum dieksekusi.
+> **Status 19 November 2026:** Notebook 01–06 tersedia di GitHub. Hasil eksekusi Google Colab: Notebook 03 **14/14 QA PASS**, Notebook 04 **140/140 KPI PASS**, Notebook 05 **100/100 digital KPI + 6/6 barriers dan 11/11 QA PASS**, serta Notebook 06 **12/12 export QA PASS**. Sembilan file CSV agregat dan satu manifest telah disimpan ke Drive privat. **Dashboard Looker Studio belum dipublikasikan; Google Sheets lama memiliki kesalahan impor locale dan tidak boleh dipakai sebelum data diimpor ulang.**
 
 ## Tim dan tanggung jawab
 
@@ -29,7 +29,7 @@ Indonesia-Financial-Inclusion-Digital-Finance-Analytics/
 │   ├── 03_cleaning_integration.ipynb    # Rafa + Mutia — executed, 14/14 QA PASS
 │   ├── 04_eda_inclusion.ipynb           # Rafa — executed, 140/140 KPI cross-checks PASS
 │   ├── 05_eda_digital_barriers.ipynb    # Mutia — Colab executed, 100+6 validations PASS
-│   └── 06_dashboard_export.ipynb        # Shared — available, requires first run
+│   └── 06_dashboard_export.ipynb        # Shared — executed in Colab, 12/12 export QA PASS
 ├── reports/
 │   ├── README.md
 │   ├── person1_quality_findings.md      # Rafa — original report filename retained
@@ -50,8 +50,8 @@ Indonesia-Financial-Inclusion-Digital-Finance-Analytics/
 | 03 — Cleaning & Integration | Rafa + Mutia | **Selesai dijalankan**, checksum tervalidasi, 14/14 quality checks PASS |
 | 04 — Financial Inclusion EDA | Rafa | **Selesai dijalankan memakai data terintegrasi**, 140/140 KPI cross-checks PASS |
 | 05 — Digital Finance & Barriers EDA | Mutia | **Sudah dijalankan di Colab**, 100/100 KPI, 6/6 barrier dan 11/11 QA PASS; interpretasi diperbarui |
-| 06 — Dashboard Export | Rafa + Mutia | **Notebook tersedia**, menunggu eksekusi dan audit hasil ekspor |
-| Looker Studio | Rafa + Mutia | **Belum dibuat/dipublikasikan** |
+| 06 — Dashboard Export | Rafa + Mutia | **Selesai dijalankan**, 12/12 export QA PASS, output di Drive privat |
+| Google Sheets / Looker Studio | Rafa + Mutia | **Tahap berikutnya:** impor ulang enam CSV dashboard (locale), QA angka, bangun 4 halaman, lalu publikasi |
 
 **Catatan:** Lulusnya kode pengecekan otomatis tidak sama dengan validasi penuh terhadap desain survei atau signifikansi statistik. Interpretasi bersifat deskriptif; tinjau codebook, denominator, definisi KPI, dan ukuran kelompok saat peer review.
 
@@ -76,7 +76,7 @@ Indonesia-Financial-Inclusion-Digital-Finance-Analytics/
 4. Jalankan Notebook **04** menggunakan Google Drive yang sama. Notebook ini akan otomatis mencari **empat file hasil Notebook 03**, tidak meminta ZIP mentah: `integrated_respondents_private.csv`, `dashboard_kpi_aggregates.csv`, `integration_quality_checks.csv`, `integration_manifest.json`.
 5. Verifikasi pesan **`ALL 140 KPI CROSS-CHECKS PASSED.`**. Grafik dan lima file hasil analisis Rafa disimpan ke lokasi data olahan yang sesuai.
 6. Notebook **05** sudah dijalankan dari output Notebook 03: **100/100 KPI**, **6/6 barrier**, dan **11/11 QA PASS**. Agregat digital Mutia tersimpan di folder processed privat.
-7. Jalankan Notebook **06** menggunakan folder processed privat yang sama. Notebook 06 menggabungkan data agregat 03/04/05, memverifikasi ulang handoff, dan menyimpan file ke `MyDrive/Financial_Inclusion_Private/dashboard_exports/`. Jangan mengunggah mikrodata ke dashboard.
+7. Notebook **06** telah dijalankan di Colab hingga **12/12 export QA PASS**. File agregat berada di `MyDrive/Financial_Inclusion_Private/dashboard_exports/`. Untuk dashboard, impor ulang CSV final (bukan file mikrodata) ke Google Sheets dengan pengaturan desimal yang benar. Panduan detail dan pembagian peran tersedia di [`dashboard/README.md`](dashboard/README.md).
 
 **Colab langsung:**
 - [Rafa — Notebook 01](https://colab.research.google.com/github/rrrafaa/Indonesia-Financial-Inclusion-Digital-Finance-Analytics/blob/main/notebooks/01_data_profiling.ipynb)
@@ -107,7 +107,8 @@ Notebook 03: simpan ZIP asli di `data/raw/`, kemudian run all. Notebook 04 dan 0
 - **Hambatan rekening:** `fin11a`–`fin11f` ditanyakan pada responden **tanpa rekening lembaga keuangan** (`account_fin == 0`); jawaban valid adalah **1 = Ya**, **2 = Tidak**. Kode **3/4** tidak masuk denominator.
 - **2024 barrier labels:** `fin11d` = tidak cukup uang, `fin11e` = anggota keluarga sudah punya rekening, `fin11f` = kurang percaya kepada lembaga keuangan.
 - **Tidak ada analisis kausal atau time series:** dataset ini cross-sectional Indonesia 2024; tidak mendukung peta/ranking provinsi.
-- **Batasan filter:** agregasi per-dimensi Notebook 03 tidak otomatis memungkinkan filter multidimensi gabungan. Gunakan Notebook 06 untuk tabel silang tambahan jika dashboard memerlukannya.
+- **Batasan filter:** ekspor Notebook 06 tetap menggunakan agregasi per-dimensi; **belum** mendukung filter multidimensi gabungan. Bila ingin gender × income, harus membuat dan memvalidasi agregat silang baru dari data privat.
+- **Google Sheets locale:** file Sheets lama yang memakai `in_ID` telah salah menafsirkan titik desimal (`61.99266284` menjadi `6199266284`). Jangan gunakan data itu untuk visualisasi; impor ulang CSV dengan locale yang memaknai titik sebagai desimal, lalu verifikasi nilai.
 
 ## Deliverable Notebook 06 dan dashboard
 
